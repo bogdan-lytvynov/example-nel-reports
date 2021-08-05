@@ -11,7 +11,7 @@ app.use((_, resp, next) => {
   }))
 
   resp.set('report-to', JSON.stringify({
-    "endpoints": [{"url":"https://nel-reports.herokuapp.com"}],
+    "endpoints": [{"url":"https://nel-reports.herokuapp.com/report"}],
     "group":"default",
     "max_age":604800,
     "include_subdomains":true
