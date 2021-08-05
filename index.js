@@ -5,6 +5,20 @@ const PORT = process.env.PORT || 3001
 
 app.use(express.json())
 app.use(morgan('combined'))
+app.use((_, resp, next) => {
+  resp.set('nel', JSON.stringify({
+    'report_to': 'default',
+    'max_age': 604800
+  }))
+
+  resp.set('report-to', JSON.stringify({
+    "endpoints": [{"url":"https://nel-reports.herokuapp.com/report"}],
+    "group":"default",
+    "max_age":604800,
+    "include_subdomains":true
+  }))
+  next()
+})
 
 const reports = []
 
