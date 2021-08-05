@@ -1,7 +1,7 @@
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
-const port = 3001
+const PORT = process.env.PORT || 3001
 
 app.use(morgan('combined'))
 app.get('/', (req, res) => {
@@ -45,6 +45,6 @@ app.use(function(err, req, res, next){
   res.render('500', { error: err });
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+    console.log(`Example app listening at http://localhost:${PORT}`)
 })
