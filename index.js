@@ -1,12 +1,20 @@
 const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
+var concat = require('concat-stream');
 const app = express()
 const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(morgan('combined'))
 app.use(express.json())
+
+app.use(function(req, res, next){
+  req.pipe(concat(function(data){
+    req.body = data;
+    next();
+  }));
+});
 //app.use((_, resp, next) => {
 //  resp.set('nel', JSON.stringify({
 //    'report_to': 'default',
