@@ -29,6 +29,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/report-2', (req, resp) => {
+  console.log(req.body)
   reports.push(req.body)
   resp.json({status: 'ok'})
 })
