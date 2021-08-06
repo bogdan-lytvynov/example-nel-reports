@@ -5,12 +5,23 @@ var concat = require('concat-stream');
 const app = express()
 const PORT = process.env.PORT || 3001
 
-//app.use(cors())
 app.use(morgan('combined'))
 app.use(express.json({
   strict: false,
   type: 'application/reports+json'
 }))
+
+app.use((_, resp, next) => {
+  resp.set('nel', JSON.stringify({
+    'report_to': 'test',
+    'max_age': 604800,
+    "include_subdomains": true,
+    "failure_fraction": 1.0
+  }))
+
+  resp.set('report-to', '{"endpoints":[{"url":"https:\\/\\/nel-reports.herokuapp.com\\/report"}],"group":"test","max_age":604800,"include_subdomains":true}')
+  next()
+})
 
 const reports = []
 
@@ -25,6 +36,11 @@ app.options('/report', cors(), (req, resp, next) => {
 app.post('/report', cors(), (req, resp, next) => {
   console.log(req.body)
   reports.push(req.body)
+  resp.json({status: 'ok'})
+})
+
+
+app.get('/cors', cors(), (req, resp) => {
   resp.json({status: 'ok'})
 })
 
