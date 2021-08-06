@@ -40,7 +40,7 @@ app.post('/report', cors(), (req, resp, next) => {
 })
 
 
-app.get('/cors', cors(), (req, resp) => {
+app.get('/cors',  (req, resp) => {
   resp.json({status: 'ok'})
 })
 
