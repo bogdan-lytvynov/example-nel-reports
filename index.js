@@ -28,8 +28,9 @@ app.get('/', (req, res) => {
     res.json(reports)
 })
 
-app.post('/report', (req, resp) => {
+app.post('/report-2', (req, resp) => {
   reports.push(req.body)
+  resp.json({status: 'ok'})
 })
 
 app.use(function(req, res, next){
