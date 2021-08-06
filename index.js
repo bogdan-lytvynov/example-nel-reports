@@ -7,14 +7,14 @@ const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(morgan('combined'))
-app.use(express.json())
+app.use(express.json({strict: false}))
 
-app.use(function(req, res, next){
-  req.pipe(concat(function(data){
-    req.body = data;
-    next();
-  }));
-});
+//app.use(function(req, res, next){
+//  req.pipe(concat(function(data){
+//    req.body = data;
+//    next();
+//  }));
+//});
 //app.use((_, resp, next) => {
 //  resp.set('nel', JSON.stringify({
 //    'report_to': 'default',
@@ -37,7 +37,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/report-2', (req, resp) => {
-  console.log(req.body.toString())
+  console.log(req.body)
   reports.push(req.body)
   resp.json({status: 'ok'})
 })
