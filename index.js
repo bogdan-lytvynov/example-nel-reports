@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express()
 const PORT = process.env.PORT || 3001
 
+app.use(cors())
 app.use(express.json())
 app.use(morgan('combined'))
 app.use((_, resp, next) => {
@@ -27,7 +28,7 @@ app.get('/', (req, res) => {
     res.json(reports)
 })
 
-app.post('/report', cors(), (req, resp) => {
+app.post('/report', (req, resp) => {
   reports.push(req.body)
 })
 
