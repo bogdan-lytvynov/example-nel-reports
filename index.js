@@ -7,7 +7,10 @@ const PORT = process.env.PORT || 3001
 
 app.use(cors())
 app.use(morgan('combined'))
-app.use(express.json({strict: false}))
+app.use(express.json({
+  strict: false,
+  type: 'application/reports+json'
+}))
 
 //app.use(function(req, res, next){
 //  req.pipe(concat(function(data){
@@ -37,7 +40,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/report-2', (req, resp) => {
-  console.log(req.get('Content-Type'))
+  console.log(req.body)
   reports.push(req.body)
   resp.json({status: 'ok'})
 })
