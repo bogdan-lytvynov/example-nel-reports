@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
     res.json(reports)
 })
 
-app.post('/report', (req, resp) => {
+app.post('/report', cors(), (req, resp) => {
   reports.push(req.body)
 })
 
@@ -63,7 +63,7 @@ app.use(function(err, req, res, next){
   // here and next(err) appropriately, or if
   // we possibly recovered from the error, simply next().
   res.status(err.status || 500);
-  res.render('500', { error: err });
+  res.json({error: err });
 });
 
 app.listen(PORT, () => {
