@@ -18,11 +18,11 @@ app.get('/', (req, res) => {
     res.json(reports)
 })
 
-app.option('/report', cors(), (req, resp) => {
+app.options('/report', cors(), (req, resp, next) => {
   resp.json({status: 'ok'})
 })
 
-app.post('/report', cors() (req, resp) => {
+app.post('/report', cors(), (req, resp, next) => {
   console.log(req.body)
   reports.push(req.body)
   resp.json({status: 'ok'})
